@@ -533,7 +533,7 @@ lxs_verify(char *xmlfile)
 			    "audio-outputdev");
 	}
 	if (kvers) {
-		if ((strcmp(kvers, "2.4")) != 0 && (strcmp(kvers, "2.6") != 0))
+		if ((strcmp(kvers, "2.4")) != 0 && (strcmp(kvers, "2.6") != 0) && (strcmp(kvers, "3.0") != 0))
 			lxs_err(gettext("invalid value for zone attribute: %s"),
 			    "kernel-version");
 	}
