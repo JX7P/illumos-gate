@@ -42,6 +42,7 @@ extern "C" {
  * Brand uname info
  */
 #define	LX_UNAME_SYSNAME	"Linux"
+#define LX_UNAME_RELEASE_3_0	"3.9.0"
 #define	LX_UNAME_RELEASE_2_6	"2.6.18"
 #define	LX_UNAME_RELEASE_2_4	"2.4.21"
 #define	LX_UNAME_VERSION	"BrandZ fake linux"
@@ -56,10 +57,12 @@ extern "C" {
 
 #define	LX_NSYSCALLS_2_4	270
 #define	LX_NSYSCALLS_2_6	317
-#define	LX_NSYSCALLS	LX_NSYSCALLS_2_6
+#define LX_NSYSCALLS_3_0	350
+#define	LX_NSYSCALLS	LX_NSYSCALLS_3_0
 
 #define	LX_KERN_2_4	0
 #define	LX_KERN_2_6	1
+#define LX_KERN_3_0	2
 
 /*
  * brand(2) subcommands

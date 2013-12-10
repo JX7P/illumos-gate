@@ -1545,8 +1545,10 @@ lxpr_read_version(lxpr_node_t *lxpnp, lxpr_uiobuf_t *uiobuf)
 	char *vers;
 	if (lx_get_zone_kern_version(LXPTOZ(lxpnp)) <= LX_KERN_2_4)
 		vers = LX_UNAME_RELEASE_2_4;
-	else
+	else if (lx_get_zone_kern_version(LXPTOZ(lxpnp)) <= LX_KERN_2_6)
 		vers = LX_UNAME_RELEASE_2_6;
+	else
+		vers = LX_UNAME_RELEASE_3_0;
 
 	lxpr_uiobuf_printf(uiobuf,
 	    "%s version %s (%s version %d.%d.%d) "

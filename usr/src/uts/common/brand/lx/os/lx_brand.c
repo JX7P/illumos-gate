@@ -627,7 +627,9 @@ lx_set_kern_version(zone_t *zone, int vers)
 	lx_zone_data_t *lxzd = (lx_zone_data_t *)zone->zone_brand_data;
 
 	lxzd->lxzd_kernel_version = vers;
-	if (vers == LX_KERN_2_6)
+	if (vers == LX_KERN_3_0)
+		lxzd->lxzd_max_syscall = LX_NSYSCALLS_3_0;
+	else if (vers == LX_KERN_2_6)
 		lxzd->lxzd_max_syscall = LX_NSYSCALLS_2_6;
 }
 

@@ -381,7 +381,9 @@ lxs_boot()
 	    sizeof (boolean_t)) == -1)
 		lxs_err(gettext("error setting zone's restart_init property"));
 
-	if ((kvers != NULL) && (strcmp(kvers, "2.6") == 0))
+	if ((kvers != NULL) && (strcmp(kvers, "3.0") == 0))
+		kversnum = LX_KERN_3_0;
+	else if ((kvers != NULL) && (strcmp(kvers, "2.6") == 0))
 		kversnum = LX_KERN_2_6;
 	else
 		kversnum = LX_KERN_2_4;

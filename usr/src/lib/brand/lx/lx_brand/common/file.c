@@ -120,13 +120,28 @@ ltos_at_flag(int lflag, int allow)
 #define	PIPENAMESZ	32 /* enough room for /tmp/.pipe.<pid>.<num> */
 
 int
-lx_pipe(uintptr_t p1)
+lx_pipe2(uintptr_t p1, uintptr_t p2)
 {
+	int lx_flags = (int)p2;
+	int flags = 0;
 	static uint32_t pipecnt = 0;
 	int cnt;
 	char pipename[PIPENAMESZ];
 	int fds[3];
 	int r = 0;
+
+	if (lx_flags) {
+
+		if (lx_flags & ~(LX_O_NONBLOCK | LX_O_CLOEXEC))
+			return -EINVAL;
+
+		if (lx_flags & LX_O_NONBLOCK)
+			flags |= O_NONBLOCK;
+
+		if (lx_flags & LX_O_CLOEXEC)
+			flags |= O_CLOEXEC;
+
+	}
 
 	fds[0] = -1;
 	fds[1] = -1;
@@ -148,9 +163,9 @@ lx_pipe(uintptr_t p1)
 	 * blocking, we first need to open the pipe for both reading and
 	 * writing.
 	 */
-	if (((fds[2] = open(pipename, O_RDWR)) < 0) ||
-	    ((fds[0] = open(pipename, O_RDONLY)) < 0) ||
-	    ((fds[1] = open(pipename, O_WRONLY)) < 0)) {
+	if (((fds[2] = open(pipename, O_RDWR | flags)) < 0) ||
+	    ((fds[0] = open(pipename, O_RDONLY | flags)) < 0) ||
+	    ((fds[1] = open(pipename, O_WRONLY | flags)) < 0)) {
 		r = errno;
 	} else {
 		/*
@@ -173,6 +188,12 @@ lx_pipe(uintptr_t p1)
 	}
 
 	return (-r);
+}
+
+int
+lx_pipe(uintptr_t p1)
+{
+	return lx_pipe2(p1, 0);
 }
 
 /*
@@ -471,6 +492,13 @@ lx_lseek(uintptr_t p1, uintptr_t p2, uintptr_t p3)
  */
 int
 lx_sync(void)
+{
+	sync();
+	return (0);
+}
+
+int
+lx_syncfs(uintptr_t p1)
 {
 	sync();
 	return (0);

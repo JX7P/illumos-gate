@@ -62,6 +62,25 @@ lx_dup2(uintptr_t p1, uintptr_t p2)
 }
 
 int
+lx_dup3(uintptr_t p1, uintptr_t p2, uintptr_t p3)
+{
+	int oldfd = (int)p1;
+	int newfd = (int)p2;
+	int args = (int)p3;
+	int rc;
+	switch (args) {
+	case NULL:
+		rc = fcntl(oldfd, F_DUP2FD, newfd);
+	case LX_O_CLOEXEC:
+		rc = fcntl(oldfd, F_DUP2FD_CLOEXEC, newfd);
+	default:
+		return -EINVAL;
+	}
+
+	return ((rc == -1) ? -errno : rc);
+}
+
+int
 lx_fcntl(uintptr_t p1, uintptr_t p2, uintptr_t p3)
 {
 	int		fd = (int)p1;

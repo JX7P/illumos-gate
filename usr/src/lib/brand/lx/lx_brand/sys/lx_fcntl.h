@@ -50,6 +50,7 @@ extern "C" {
 #define	LX_O_LARGEFILE		0100000
 #define	LX_O_DIRECTORY		0200000
 #define	LX_O_NOFOLLOW		0400000
+#define	LX_O_CLOEXEC		02000000
 
 #define	LX_F_DUPFD		0
 #define	LX_F_GETFD		1

@@ -29,7 +29,7 @@
 PROGS =	lx_install lx_distro_install lx_init_zone
 SUBDIRS = distros
 XMLDOCS =	config.xml platform.xml
-TEMPLATES =	SUNWlx.xml
+TEMPLATES =	SUNWlx.xml SUNWlx26.xml SUNWlx30.xml
 
 all:	$(PROGS)
 
