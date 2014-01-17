@@ -405,12 +405,12 @@ ucode_chipset_amd(uint8_t *buf, int size)
 static ucode_errno_t
 ucode_locate_amd(cpu_t *cp, cpu_ucode_info_t *uinfop, ucode_file_t *ufp)
 {
+#ifndef __xpv
 	char name[MAXPATHLEN];
 	intptr_t fd;
 	int count, rc;
 	ucode_file_amd_t *ucodefp = ufp->amd;
 
-#ifndef __xpv
 	uint16_t eq_sig = 0;
 	int i;
 
@@ -455,57 +455,7 @@ ucode_locate_amd(cpu_t *cp, cpu_ucode_info_t *uinfop, ucode_file_t *ufp)
 	}
 	return (EM_NOMATCH);
 #else
-	int size = 0;
-	char c;
-
-	/*
-	 * The xVM case is special. To support mixed-revision systems, the
-	 * hypervisor will choose which patch to load for which CPU, so the
-	 * whole microcode patch container file will have to be loaded.
-	 *
-	 * Since this code is only run on the boot cpu, we don't have to care
-	 * about failing ucode_zalloc() or freeing allocated memory.
-	 */
-	if (cp->cpu_id != 0)
-		return (EM_INVALIDARG);
-
-	(void) snprintf(name, MAXPATHLEN, "/%s/%s/container",
-	    UCODE_INSTALL_PATH, cpuid_getvendorstr(cp));
-
-	if ((fd = kobj_open(name)) == -1)
-		return (EM_OPENFILE);
-
-	/* get the file size by counting bytes */
-	do {
-		count = kobj_read(fd, &c, 1, size);
-		size += count;
-	} while (count);
-
-	ucodefp = ucode_zalloc(cp->cpu_id, sizeof (*ucodefp));
-	ASSERT(ucodefp);
-	ufp->amd = ucodefp;
-
-	ucodefp->usize = size;
-	ucodefp->ucodep = ucode_zalloc(cp->cpu_id, size);
-	ASSERT(ucodefp->ucodep);
-
-	/* load the microcode patch container file */
-	count = kobj_read(fd, (char *)ucodefp->ucodep, size, 0);
-	(void) kobj_close(fd);
-
-	if (count != size)
-		return (EM_FILESIZE);
-
-	/* make sure the container file is valid */
-	rc = ucode->validate(ucodefp->ucodep, ucodefp->usize);
-
-	if (rc != EM_OK)
-		return (rc);
-
-	/* disable chipset-specific patches */
-	ucode_chipset_amd(ucodefp->ucodep, ucodefp->usize);
-
-	return (EM_OK);
+	return (EM_NOMATCH);
 #endif
 }
 
