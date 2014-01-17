@@ -633,7 +633,7 @@ static greg_t
 fix_segreg(greg_t sr, int iscs, model_t datamodel)
 {
 	kthread_t *t = curthread;
-	
+
 	switch (sr &= 0xffff) {
 
 	case 0:
@@ -669,7 +669,7 @@ fix_segreg(greg_t sr, int iscs, model_t datamodel)
 		break;
 	}
 
- 	/*
+	/*
 	 * Allow this process's brand to do any necessary segment register
 	 * manipulation.
 	 */

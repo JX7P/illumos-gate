@@ -2201,7 +2201,7 @@ main(int argc, char **argv)
 		 * we can simply skip it.  If future brands don't fall into
 		 * either category, we'll have to add a per-brand utmpx
 		 * setup hook.
- 		 */
+		 */
 		if (!failsafe && (strcmp(zonebrand, "lx") != 0))
 			if (setup_utmpx(slaveshortname) == -1)
 				return (1);

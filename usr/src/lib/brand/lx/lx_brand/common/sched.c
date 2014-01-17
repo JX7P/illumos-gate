@@ -365,7 +365,7 @@ lx_sched_getparam(uintptr_t pid, uintptr_t param)
 	 */
 	if (s_pid == getpid()) {
 		if ((ret = pthread_getschedparam(s_tid, &policy, &sp)) != 0)
-		    return (-ret);
+			return (-ret);
 	} else {
 		if (sched_getparam(s_pid, &sp) == -1)
 			return (-errno);

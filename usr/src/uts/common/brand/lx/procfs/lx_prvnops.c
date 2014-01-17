@@ -1927,7 +1927,7 @@ lxpr_read_cpuinfo(lxpr_node_t *lxpnp, lxpr_uiobuf_t *uiobuf)
 		lxpr_uiobuf_printf(uiobuf, "cache size\t: %u KB\n",
 		    getl2cacheinfo(cp, NULL, NULL, NULL) / 1024);
 
-		if (is_x86_feature(x86_featureset, X86FSET_HTT)) { 
+		if (is_x86_feature(x86_featureset, X86FSET_HTT)) {
 			/*
 			 * 'siblings' is used for HT-style threads
 			 */
@@ -2613,7 +2613,8 @@ lxpr_readdir_common(lxpr_node_t *lxpnp, uio_t *uiop, int *eofp,
 		 * So we set uiop->uio_offset separately, ignoring what
 		 * uiomove() does.
 		 */
-		if ((error = uiomove((caddr_t)dirent, reclen, UIO_READ, uiop))) {
+		if ((error = uiomove((caddr_t)dirent, reclen, UIO_READ,
+		    uiop))) {
 			return (error);
 		}
 

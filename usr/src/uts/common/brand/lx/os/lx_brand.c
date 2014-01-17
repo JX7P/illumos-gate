@@ -743,8 +743,8 @@ lx_elfexec(struct vnode *vp, struct execa *uap, struct uarg *args,
 		 * store relevant information about it in the aux vector, where
 		 * the brand library can find it.
 		 */
-		if ((error = lookupname(LX_LINKER, UIO_SYSSPACE, FOLLOW, NULLVPP,
-		    &nvp))) {
+		if ((error = lookupname(LX_LINKER, UIO_SYSSPACE, FOLLOW,
+		    NULLVPP, &nvp))) {
 			uprintf("%s: not found.", LX_LINKER);
 			return (error);
 		}

@@ -99,7 +99,7 @@ lx_pid_remove_hash(pid_t pid, id_t tid)
 	return (lpidp);
 }
 
-struct pid * pid_find(pid_t pid);
+struct pid *pid_find(pid_t pid);
 
 /*
  * given a solaris pid/tid pair, create a linux pid

@@ -177,7 +177,8 @@ _netdir_getbyname(struct netconfig *netconfigp,
 			}
 			goto fail;
 		}
-		while (n2h_result.h_addr_list[n2h_count++] != NULL);
+		while (n2h_result.h_addr_list[n2h_count++] != NULL)
+			;
 		n2h_count--;
 	}
 
@@ -327,7 +328,8 @@ _netdir_getbyaddr(struct netconfig *netconfigp, struct netbuf *nbp)
 			}
 			goto fail;
 		}
-		while (a2h_result.h_aliases[a2h_count++] != NULL);
+		while (a2h_result.h_aliases[a2h_count++] != NULL)
+			;
 		/*
 		 * We need to count a2h_result.h_name as a valid name for
 		 * for the address we just looked up.  Of course a2h_count
@@ -377,7 +379,7 @@ _netdir_getbyaddr(struct netconfig *netconfigp, struct netbuf *nbp)
 
 		if ((a2h_count > 0) && (i > 0) &&
 		    ((hsp[i].h_host =
-			    strdup(a2h_result.h_aliases[i - 1])) == NULL))
+		    strdup(a2h_result.h_aliases[i - 1])) == NULL))
 			goto malloc_fail;
 
 	lxt_debug("_netdir_getbyaddr: hahaha2 - %d\n", r_count);

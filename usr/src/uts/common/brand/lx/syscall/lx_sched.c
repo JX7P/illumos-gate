@@ -173,7 +173,7 @@ lx_sched_setscheduler(l_pid_t pid, int policy, struct lx_sched_param *param)
 			policy = LX_SCHED_OTHER;
 		else if (strcmp(pcinfo.pc_clname, "RT") == 0)
 			policy = ((rtparms_t *)pcparm.pc_clparms)->rt_tqnsecs ==
-				RT_TQINF ? LX_SCHED_FIFO : LX_SCHED_RR;
+			    RT_TQINF ? LX_SCHED_FIFO : LX_SCHED_RR;
 		else
 			return (set_errno(EINVAL));
 	}
@@ -195,7 +195,7 @@ lx_sched_setscheduler(l_pid_t pid, int policy, struct lx_sched_param *param)
 		pcparm.pc_cid = pcinfo.pc_cid;
 		((rtparms_t *)pcparm.pc_clparms)->rt_pri = prio;
 		((rtparms_t *)pcparm.pc_clparms)->rt_tqnsecs =
-			policy == LX_SCHED_RR ? RT_TQDEF : RT_TQINF;
+		    policy == LX_SCHED_RR ? RT_TQDEF : RT_TQINF;
 		break;
 
 	case LX_SCHED_OTHER:
@@ -263,7 +263,7 @@ lx_sched_getscheduler(l_pid_t pid)
 		policy = LX_SCHED_OTHER;
 	else if (strcmp(pcinfo.pc_clname, "RT") == 0)
 		policy = ((rtparms_t *)pcparm.pc_clparms)->rt_tqnsecs ==
-			RT_TQINF ? LX_SCHED_FIFO : LX_SCHED_RR;
+		    RT_TQINF ? LX_SCHED_FIFO : LX_SCHED_RR;
 	else
 		policy = set_errno(EINVAL);
 
@@ -316,7 +316,7 @@ lx_sched_setparam(l_pid_t pid, struct lx_sched_param *param)
 		policy = LX_SCHED_OTHER;
 	else if (strcmp(pcinfo.pc_clname, "RT") == 0)
 		policy = ((rtparms_t *)pcparm.pc_clparms)->rt_tqnsecs ==
-			RT_TQINF ? LX_SCHED_FIFO : LX_SCHED_RR;
+		    RT_TQINF ? LX_SCHED_FIFO : LX_SCHED_RR;
 	else
 		return (set_errno(EINVAL));
 
@@ -337,7 +337,7 @@ lx_sched_setparam(l_pid_t pid, struct lx_sched_param *param)
 		pcparm.pc_cid = pcinfo.pc_cid;
 		((rtparms_t *)pcparm.pc_clparms)->rt_pri = prio;
 		((rtparms_t *)pcparm.pc_clparms)->rt_tqnsecs =
-			policy == LX_SCHED_RR ? RT_TQDEF : RT_TQINF;
+		    policy == LX_SCHED_RR ? RT_TQDEF : RT_TQINF;
 		break;
 
 	case LX_SCHED_OTHER:
@@ -418,7 +418,7 @@ lx_sched_getparam(l_pid_t pid, struct lx_sched_param *param)
 			local_param.lx_sched_prio = -(prio * 20) / scale;
 	} else if (strcmp(pcinfo.pc_clname, "RT") == 0)
 		local_param.lx_sched_prio =
-			((rtparms_t *)pcparm.pc_clparms)->rt_pri;
+		    ((rtparms_t *)pcparm.pc_clparms)->rt_pri;
 	else
 		rv = set_errno(EINVAL);
 

@@ -82,7 +82,7 @@ lx_set_thread_area(struct ldt_info *inf)
 		 * find an empty entry in the tls for this thread
 		 */
 		for (i = 0, dscrp = jlwp->br_tls;
-					i < LX_TLSNUM; i++, dscrp++)
+		    i < LX_TLSNUM; i++, dscrp++)
 			if (((unsigned long *)dscrp)[0] == 0 &&
 			    ((unsigned long *)dscrp)[1] == 0)
 				break;

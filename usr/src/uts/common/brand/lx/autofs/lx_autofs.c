@@ -314,11 +314,11 @@ i_lalr_complete(lx_autofs_vfs_t *data, lx_autofs_lookup_req_t *lalr)
 	/* Remove this request from the hashes so no one can look it up. */
 	mutex_enter(&data->lav_lock);
 	(void) mod_hash_remove(data->lav_id_hash,
-		    (mod_hash_key_t)(uintptr_t)lalr->lalr_pkt.lap_id,
-		    (mod_hash_val_t)&lalr_tmp);
+	    (mod_hash_key_t)(uintptr_t)lalr->lalr_pkt.lap_id,
+	    (mod_hash_val_t)&lalr_tmp);
 	(void) mod_hash_remove(data->lav_path_hash,
-		    (mod_hash_key_t)lalr->lalr_pkt.lap_name,
-		    (mod_hash_val_t)&lalr_tmp);
+	    (mod_hash_key_t)lalr->lalr_pkt.lap_name,
+	    (mod_hash_val_t)&lalr_tmp);
 	mutex_exit(&data->lav_lock);
 
 	/* Mark this requst as complete and wakeup anyone waiting on it. */
@@ -359,11 +359,11 @@ i_lalr_abort(lx_autofs_vfs_t *data, lx_autofs_lookup_req_t *lalr)
 
 	/* Remove this request from the hashes so no one can look it up. */
 	(void) mod_hash_remove(data->lav_id_hash,
-		    (mod_hash_key_t)(uintptr_t)lalr->lalr_pkt.lap_id,
-		    (mod_hash_val_t)&lalr_tmp);
+	    (mod_hash_key_t)(uintptr_t)lalr->lalr_pkt.lap_id,
+	    (mod_hash_val_t)&lalr_tmp);
 	(void) mod_hash_remove(data->lav_path_hash,
-		    (mod_hash_key_t)lalr->lalr_pkt.lap_name,
-		    (mod_hash_val_t)&lalr_tmp);
+	    (mod_hash_key_t)lalr->lalr_pkt.lap_name,
+	    (mod_hash_val_t)&lalr_tmp);
 	mutex_exit(&data->lav_lock);
 
 	/* It's ok to free this now because the ref count was zero. */
@@ -720,7 +720,7 @@ i_bs_readdir(vnode_t *dvp, list_t *dir_stack, list_t *file_stack)
 		}
 
 		for (dp = dbuf; ((intptr_t)dp < (intptr_t)dbuf + dbuflen);
-			dp = (dirent64_t *)((intptr_t)dp + dp->d_reclen)) {
+		    dp = (dirent64_t *)((intptr_t)dp + dp->d_reclen)) {
 
 			nm = dp->d_name;
 

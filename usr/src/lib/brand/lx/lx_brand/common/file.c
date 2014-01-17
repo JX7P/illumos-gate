@@ -736,8 +736,8 @@ lx_fchmodat(uintptr_t ext1, uintptr_t p1, uintptr_t p2, uintptr_t p3)
 	/* LINTED [set but not used in function] */
 	int flag = p3;
 
-        if (flag != p3)
-                return (flag); /* workaround */
+	if (flag != p3)
+		return (flag); /* Lint oddity */
 
 	ret = getpathat(atfd, p1, pathbuf, sizeof (pathbuf));
 	if (ret < 0)

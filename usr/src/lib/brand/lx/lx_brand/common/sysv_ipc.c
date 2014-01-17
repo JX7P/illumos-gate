@@ -842,7 +842,7 @@ lx_ipc(uintptr_t cmd, uintptr_t arg1, uintptr_t arg2, uintptr_t arg3,
 	void *bufptr = (void *)arg4;
 
 	lx_debug("lx_ipc(%d, %d, %d, %d, 0x%p, %d)\n",
-		cmd, arg1, arg2, arg3, bufptr, arg4);
+	    cmd, arg1, arg2, arg3, bufptr, arg4);
 
 	switch (cmd) {
 	case LX_MSGGET:

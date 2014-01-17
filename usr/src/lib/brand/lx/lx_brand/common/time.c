@@ -116,7 +116,7 @@ lx_setitimer(uintptr_t p1, uintptr_t p2, uintptr_t p3)
 	}
 
 	return ((setitimer((int)p1, itp, (struct itimerval *)p3) != 0) ?
-		-errno : 0);
+	    -errno : 0);
 }
 
 /*

@@ -976,7 +976,7 @@ init_idt_common(gate_desc_t *idt)
 	set_gatesegd(&idt[T_MCE], &mcetrap, KCS_SEL, SDT_SYSIGT, TRP_KPL, 0);
 	set_gatesegd(&idt[T_SIMDFPE], &xmtrap, KCS_SEL, SDT_SYSIGT, TRP_KPL, 0);
 
- 	/*
+	/*
 	 * install "int80" handler at, well, 0x80.
 	 */
 	set_gatesegd(&idt0[T_INT80], &sys_int80, KCS_SEL, SDT_SYSIGT, TRP_UPL,
@@ -1007,9 +1007,9 @@ init_idt_common(gate_desc_t *idt)
 	    SDT_SYSIGT, TRP_UPL, 0);
 
 	/*
--	 * Prepare interposing descriptors for the branded "int80"
--	 * and syscall handlers and cache copies of the default
--	 * descriptors.
+	 * Prepare interposing descriptors for the branded "int80"
+	 * and syscall handlers and cache copies of the default
+	 * descriptors.
 	 */
 	brand_tbl[0].ih_inum = T_INT80;
 	brand_tbl[0].ih_default_desc = idt0[T_INT80];

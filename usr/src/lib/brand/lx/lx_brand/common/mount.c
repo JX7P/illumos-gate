@@ -371,7 +371,7 @@ i_make_nfs_args(lx_nfs_mount_data_t *lx_nmd, struct nfs_args *nfs_args,
 	if ((lx_nmd->nmd_flags & LX_NFS_MOUNT_VER3) != 0) {
 		(void) strcpy(fstype, "nfs3");
 		if ((rv = i_add_option_int("vers", 3,
-			    options, options_size)) != 0)
+		    options, options_size)) != 0)
 			return (rv);
 
 		if (lx_nmd->nmd_root.lx_fh3_length >
@@ -397,7 +397,7 @@ i_make_nfs_args(lx_nfs_mount_data_t *lx_nmd, struct nfs_args *nfs_args,
 		 */
 		(void) strcpy(fstype, "nfs");
 		if ((rv = i_add_option_int("vers", 2,
-			    options, options_size)) != 0)
+		    options, options_size)) != 0)
 			return (rv);
 
 		/* Solaris seems to add this flag when using v2. */
@@ -421,7 +421,7 @@ i_make_nfs_args(lx_nfs_mount_data_t *lx_nmd, struct nfs_args *nfs_args,
 		nfs_args_knconf->knc_semantics = NC_TPI_COTS_ORD;
 		nfs_args_knconf->knc_proto = "tcp";
 		if ((rv = i_add_option("proto=tcp",
-			    options, options_size)) != 0)
+		    options, options_size)) != 0)
 			return (rv);
 		if (stat("/dev/tcp", &statbuf) != 0)
 			return (-errno);
@@ -434,7 +434,7 @@ i_make_nfs_args(lx_nfs_mount_data_t *lx_nmd, struct nfs_args *nfs_args,
 		nfs_args_knconf->knc_semantics = NC_TPI_CLTS;
 		nfs_args_knconf->knc_proto = "udp";
 		if ((rv = i_add_option("proto=udp",
-			    options, options_size)) != 0)
+		    options, options_size)) != 0)
 			return (rv);
 		if (stat("/dev/udp", &statbuf) != 0)
 			return (-errno);
@@ -452,45 +452,45 @@ i_make_nfs_args(lx_nfs_mount_data_t *lx_nmd, struct nfs_args *nfs_args,
 	/* Translate Linux nfs mount parameters into Solaris mount options. */
 	if (lx_nmd->nmd_rsize != LX_NMD_DEFAULT_RSIZE) {
 		if ((rv = i_add_option_int("rsize", lx_nmd->nmd_rsize,
-			    options, options_size)) != 0)
+		    options, options_size)) != 0)
 			return (rv);
 		nfs_args->rsize = lx_nmd->nmd_rsize;
 		nfs_args->flags |= NFSMNT_RSIZE;
 	}
 	if (lx_nmd->nmd_wsize != LX_NMD_DEFAULT_WSIZE) {
 		if ((rv = i_add_option_int("wsize", lx_nmd->nmd_wsize,
-			    options, options_size)) != 0)
+		    options, options_size)) != 0)
 			return (rv);
 		nfs_args->wsize = lx_nmd->nmd_wsize;
 		nfs_args->flags |= NFSMNT_WSIZE;
 	}
 	if ((rv = i_add_option_int("timeo", lx_nmd->nmd_timeo,
-		    options, options_size)) != 0)
+	    options, options_size)) != 0)
 		return (rv);
 	nfs_args->timeo = lx_nmd->nmd_timeo;
 	nfs_args->flags |= NFSMNT_TIMEO;
 	if ((rv = i_add_option_int("retrans", lx_nmd->nmd_retrans,
-		    options, options_size)) != 0)
+	    options, options_size)) != 0)
 		return (rv);
 	nfs_args->retrans = lx_nmd->nmd_retrans;
 	nfs_args->flags |= NFSMNT_RETRANS;
 	if ((rv = i_add_option_int("acregmin", lx_nmd->nmd_acregmin,
-		    options, options_size)) != 0)
+	    options, options_size)) != 0)
 		return (rv);
 	nfs_args->acregmin = lx_nmd->nmd_acregmin;
 	nfs_args->flags |= NFSMNT_ACREGMIN;
 	if ((rv = i_add_option_int("acregmax", lx_nmd->nmd_acregmax,
-		    options, options_size)) != 0)
+	    options, options_size)) != 0)
 		return (rv);
 	nfs_args->acregmax = lx_nmd->nmd_acregmax;
 	nfs_args->flags |= NFSMNT_ACREGMAX;
 	if ((rv = i_add_option_int("acdirmin", lx_nmd->nmd_acdirmin,
-		    options, options_size)) != 0)
+	    options, options_size)) != 0)
 		return (rv);
 	nfs_args->acdirmin = lx_nmd->nmd_acdirmin;
 	nfs_args->flags |= NFSMNT_ACDIRMIN;
 	if ((rv = i_add_option_int("acdirmax", lx_nmd->nmd_acdirmax,
-		    options, options_size)) != 0)
+	    options, options_size)) != 0)
 		return (rv);
 	nfs_args->acdirmax = lx_nmd->nmd_acdirmax;
 	nfs_args->flags |= NFSMNT_ACDIRMAX;
